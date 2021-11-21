@@ -18,5 +18,5 @@ app.use((req, res) => {
 
 app.listen(PORT, error => {
   if (error) return console.log(error);
-  console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`\n> Listening at http://localhost:${PORT}`);
 });
