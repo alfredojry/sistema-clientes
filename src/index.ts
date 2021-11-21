@@ -1,13 +1,15 @@
 import express from 'express';
 import router from './routes';
+import path from 'path';
 
 const app = express();
 const PORT = 4000;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'react-app', 'build')));
 
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  res.sendFile(path.join(__dirname, 'react-app', 'build', 'index.html'));
 });
 
 app.use('/api', router);

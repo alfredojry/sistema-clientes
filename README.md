@@ -95,7 +95,20 @@ npm install
 npm start
 ```
 
-## Compilação
+## Deploy
+
+### Servidor
+
+```sh
+npm run build
+```
+
+### Cliente
+
+```sh
+cd src/react-app
+npm run build
+```
 
 ## Demonstração
 Em progreso...
