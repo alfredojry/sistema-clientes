@@ -4,7 +4,7 @@ API + Interface Web para cadastro de clientes
 
 ## Tecnologias
 
-* Front-End (por fazer): Typescript, React, Redux
+* Front-End: Typescript, React, CSS (por fazer)
 * Back-End: Typescript, Node, Express, SQLite
 
 ## Rotas da API
@@ -62,4 +62,41 @@ Observaçôes:
 
 * SQLite automáticamente asigna o `id` da fila como `rowid`
 * SQLite não possui um formato de datas, então na coluna data é assinado o tempo UNIX _timestamp_.
+
+## Instalação
+
+### Requisitos
+* GIT
+* Node >= 16.13.0
+* NPM >= 8.1.0
+
+Para desenvolvimento, o server está rolando na porta 4000 e em outra instancia de node o cliente react estará rolando na porta 3000.
+Dada a configuração de proxi do cliente react, ele faz requisições na porta de node sem problema.
+
+### 1. Clonar este repositório
+
+```sh
+git clone git@github.com:alfredojry/sistema-clientes.git
+```
+
+### 2. Configurar e iniciar servidor
+
+```sh
+cd sistema-clientes
+npm install
+npm run dev
+```
+
+### 3. Configurar e iniciar cliente em outra aba de terminal
+
+```sh
+cd src/react-app
+npm install
+npm start
+```
+
+## Compilação
+
+## Demonstração
+Em progreso...
 
