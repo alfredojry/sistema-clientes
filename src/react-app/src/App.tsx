@@ -11,11 +11,14 @@ function App() {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [view, setView] = useState('customers-list');
   const [oneCustomer, setOneCustomer] = useState<Customer | any>({});
-  const switchComponent = (componentName: string) => setView(componentName);
+  const switchComponent = (componentName: string) => {
+    setView(componentName);
+    if (componentName === 'customers-list') fetchCustomers();
+  }
   
   useEffect(() => {
     fetchCustomers();
-  }, [view]);
+  }, []);
   
   const fetchCustomers = (): void => {
     getCustomers()
