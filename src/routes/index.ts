@@ -11,9 +11,15 @@ router.get('/clientes', (req, res) => {
     });
   } else {
     const { nome } = req.query;
-    customersDbController.listCustomersByName(nome, clientes => {
-      res.json(clientes);
-    });
+    if (nome) {
+      customersDbController.listCustomersByName(nome, clientes => {
+        res.json(clientes);
+      });
+    } else {
+      customersDbController.listCustomers(clientes => {
+        res.json(clientes);
+      });
+    }
   }
 });
 
