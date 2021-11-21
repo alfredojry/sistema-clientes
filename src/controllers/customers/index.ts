@@ -44,7 +44,7 @@ const customersDbController = {
     const { nome, sobrenome, idade, data_atualizado } = customer;
     const params = [nome, sobrenome, idade, data_atualizado, id];
     database.run(sql, params, function(error) {
-      callback(this.changes);
+      callback(Boolean(this.changes));
     });
   },
   

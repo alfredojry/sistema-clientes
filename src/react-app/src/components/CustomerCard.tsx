@@ -2,12 +2,18 @@ import React from 'react';
 
 type Props = CustomerProps & {
   editCustomer: (id: string, customer: Customer, event: React.FormEvent) => void
-  deleteCustomer?: (id: string) => void
+  deleteCustomer: (id: string) => void
   showCustomerById: (event: React.MouseEvent) => void
   showEdit: (event: React.MouseEvent) => void
 }
 
-const CustomerCard: React.FC<Props> = ({ customer, editCustomer, deleteCustomer, showCustomerById, showEdit }) => {
+const CustomerCard: React.FC<Props> = ({
+  customer,
+  editCustomer,
+  deleteCustomer,
+  showCustomerById,
+  showEdit
+}) => {
   const { id, nome, sobrenome, idade, data_criado, data_atualizado } = customer;
   const criado: Date = new Date(data_criado);
   const atualizado: Date = new Date(data_atualizado);
@@ -20,8 +26,8 @@ const CustomerCard: React.FC<Props> = ({ customer, editCustomer, deleteCustomer,
       <p>Atualizado: {atualizado.toLocaleString()}</p>
       <div>
         <button onClick={showCustomerById} id={String(id)}>Ver</button>
-        <button onClick={showEdit}>Atualizar</button>
-        <button onClick={() => console.log('Soon deleting customer...')}>Apagar</button>
+        <button onClick={showEdit} id={String(id)}>Atualizar</button>
+        <button onClick={() => deleteCustomer(String(id))} id={String(id)}>Apagar</button>
       </div>
     </div>
   );

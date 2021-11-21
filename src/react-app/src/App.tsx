@@ -15,7 +15,7 @@ function App() {
   
   useEffect(() => {
     fetchCustomers();
-  }, []);
+  }, [view]);
   
   const fetchCustomers = (): void => {
     getCustomers()
@@ -23,9 +23,12 @@ function App() {
     .catch((error: Error) => console.log(error));
   };
   
-  const fetchOneCustomer = (id: number): void => {
+  const fetchOneCustomer = (id: number, view: string): void => {
     getOneCustomer(id)
-    .then(({ data }: Customer | any) => setOneCustomer(data))
+    .then(({ data }: Customer | any) => {
+      setOneCustomer(data);
+      setView(view);
+    })
     .catch((error: Error) => console.log(error));
   };
   
@@ -36,9 +39,8 @@ function App() {
         if (status !== 200) {
           throw new Error('Error! Customer not saved')
         }
-        // setCustomers(data)
         if (data.id) {
-          fetchOneCustomer(data.id)
+          fetchOneCustomer(data.id, 'customer')
         }
         setView('customer');
       })
@@ -47,32 +49,37 @@ function App() {
   
   const handleShowCustomer = (event: React.MouseEvent) => {
     const id = Number(event.currentTarget.id);
-    setView('customer');
-    fetchOneCustomer(id);
+    fetchOneCustomer(id, 'customer');
   };
   
   const handleShowEdit = (event: React.MouseEvent) => {
     const id = Number(event.currentTarget.id);
-    setView('edit-customer');
-    fetchOneCustomer(id);
+    fetchOneCustomer(id, 'edit-customer');
   };
   
   const handleUpdateCustomer = (id: string, formData: Customer | any, event: React.FormEvent): void => {
   event.preventDefault();
     updateCustomer(id, formData)
-      .then(({ status, data }) => {
-        if (status !==200) {
+      .then(({ status }) => {
+        if (status !== 204) {
           throw new Error('Error! Customer not updated');
         }
-        if (data.id) {
-          fetchOneCustomer(data.id)
-        }
-        setView('customer');  
+        fetchOneCustomer(Number(id), 'customer');
       })
       .catch(error => console.log(error));
   };
   
-  const handleDeleteCustomer = (id: string): void => {};
+  const handleDeleteCustomer = (id: string): void => {
+    deleteCustomer(id)
+      .then(({ status }) => {
+        if (status !== 204) {
+          throw new Error('Error! Customer not deleted');
+        }
+        setView('customers-list');
+        fetchCustomers();
+      })
+      .catch(error => console.log(error));
+  };
   
   return (
     <div className="App">
@@ -82,6 +89,7 @@ function App() {
         showCustomerById={handleShowCustomer}
         editCustomer={handleUpdateCustomer}
         showEdit={handleShowEdit}
+        deleteCustomer={handleDeleteCustomer}
       />}
       {view === 'add-customer' && <AddCustomer
         saveCustomer={handleSaveCustomer}
@@ -92,6 +100,7 @@ function App() {
         switchComponent={switchComponent}
         editCustomer={handleUpdateCustomer}
         showEdit={handleShowEdit}
+        deleteCustomer={handleDeleteCustomer}
       />}
       {view === 'edit-customer' && <EditCustomer
         switchComponent={switchComponent}

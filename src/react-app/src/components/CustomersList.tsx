@@ -7,9 +7,17 @@ type Props = {
   showCustomerById: (event: React.MouseEvent) => void
   editCustomer: (id: string, customer: Customer, event: React.FormEvent) => void
   showEdit: (event: React.MouseEvent) => void
+  deleteCustomer: (id: string) => void
 }
 
-const CustomersList: React.FC<Props> = ({ customers, switchComponent, showCustomerById, editCustomer, showEdit }) => {
+const CustomersList: React.FC<Props> = ({
+  customers,
+  switchComponent,
+  showCustomerById,
+  editCustomer,
+  showEdit,
+  deleteCustomer
+}) => {
   
   return (
     <div className="CustomersList">
@@ -23,6 +31,7 @@ const CustomersList: React.FC<Props> = ({ customers, switchComponent, showCustom
           showCustomerById={showCustomerById}
           editCustomer={editCustomer}
           showEdit={showEdit}
+          deleteCustomer={deleteCustomer}
         />
       ))}
     </div>

@@ -7,7 +7,12 @@ type Props = {
   switchComponent: (componentName: string) => void
 }
 
-const EditCustomer: React.FC<Props> = ({ idCustomer, customer, editCustomer, switchComponent }) => {
+const EditCustomer: React.FC<Props> = ({
+  idCustomer,
+  customer,
+  editCustomer,
+  switchComponent,
+}) => {
   const [formData, setFormData] = useState<Customer | any>(customer);
   
   const handleForm = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -23,15 +28,15 @@ const EditCustomer: React.FC<Props> = ({ idCustomer, customer, editCustomer, swi
       <form className='Form' onSubmit={(event) => editCustomer(idCustomer, formData, event)}>
         <label htmlFor='nome'>
           Nome
-          <input onChange={handleForm} type='text' id='nome' />
+          <input onChange={handleForm} type='text' id='nome' value={formData.nome} />
         </label>
         <label htmlFor='sobrenome'>
           Sobrenome
-          <input onChange={handleForm} type='text' id='sobrenome' />
+          <input onChange={handleForm} type='text' id='sobrenome' value={formData.sobrenome} />
         </label>
         <label htmlFor='idade'>
           Idade
-          <input onChange={handleForm} type='number' id='idade' />
+          <input onChange={handleForm} type='number' id='idade' value={formData.idade} />
         </label>
         <button disabled={formData === undefined ? true : false}>
           Editar
