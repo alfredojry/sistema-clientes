@@ -3,8 +3,8 @@ type Customer = {
   nome: string
   sobrenome: string
   idade: number
-  data_criado?: Date
-  data_atualizado: Date
+  data_criado?: Number
+  data_atualizado: Number
 }
 
 export default Customer;

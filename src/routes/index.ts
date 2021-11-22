@@ -12,7 +12,7 @@ router.get('/clientes', (req, res) => {
   } else {
     const { nome } = req.query;
     if (nome) {
-      customersDbController.listCustomersByName(nome, clientes => {
+      customersDbController.listCustomersByName(`${nome}`, clientes => {
         res.json(clientes);
       });
     } else {
@@ -24,7 +24,7 @@ router.get('/clientes', (req, res) => {
 });
 
 router.get('/clientes/:id', (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
   customersDbController.getCustomersById(id, cliente => {
     res.json(cliente);
   });

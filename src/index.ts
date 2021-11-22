@@ -3,7 +3,7 @@ import router from './routes';
 import path from 'path';
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'react-app', 'build')));
@@ -18,7 +18,6 @@ app.use((req, res) => {
   res.status(404).send();
 });
 
-app.listen(PORT, error => {
-  if (error) return console.log(error);
+app.listen(PORT, () => {
   console.log(`\n> Listening at http://localhost:${PORT}`);
 });

@@ -12,15 +12,15 @@ const SQL_CUSTOMERS_CREATE = `
   )
 `;
 
-const database = new sqlite3.Database(DB_SOURCE, error => {
-  if (error) {
-    console.log(eror);
-    throw error;
+const database = new sqlite3.Database(DB_SOURCE, errorDB => {
+  if (errorDB) {
+    console.log(errorDB);
+    throw errorDB;
   } else {
     console.log('\n> Database connected succesfully');
-    database.run(SQL_CUSTOMERS_CREATE, function (error) {
-      if (error) {
-        console.log(error);
+    database.run(SQL_CUSTOMERS_CREATE, function (errorTB) {
+      if (errorTB) {
+        console.log(errorTB);
       } else {
         console.log('\n> Table succesfully created or connected if it exists');
       }

@@ -54,7 +54,7 @@ const customersDbController = {
       WHERE rowid = ?
     `;
     database.run(sql, [ id ], function(error) {
-      callback(this.changes);
+      callback(!!this.changes);
     });
   },
 
